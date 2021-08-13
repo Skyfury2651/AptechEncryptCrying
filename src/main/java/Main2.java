@@ -21,7 +21,6 @@ public class Main2 {
     public static PublicKey publicKey;
     public static PrivateKey privateKey;
 
-
     public static void main(String argv[]) throws Exception {
         String sentence_to_server;
         String sentence_from_server;
@@ -55,7 +54,6 @@ public class Main2 {
             String encryptedText = CypherUtils.encryptTextUsingAES(sentence_to_server, CypherUtils.secretAESKeyString);
             String encryptedAESKeyString = CypherUtils.encryptAESKey(CypherUtils.secretAESKeyString, privateKey);
 
-
             //Gửi chuỗi ký tự tới Server thông qua outputStream đã nối với Socket (ở trên)
 //            outToServer.writeBytes(sentence_to_server + '\n');
             outToServer.writeBytes(encryptedText + '\n');
@@ -63,8 +61,11 @@ public class Main2 {
             //Đọc tin từ Server thông qua InputSteam đã nối với socket
             sentence_from_server = inFromServer.readLine();
 
+            String dencryptedAESKeyString = CypherUtils.decryptAESKey(sentence_from_server, Main.publicKey);
+            String dencryptedText = CypherUtils.decryptTextUsingAES(dencryptedAESKeyString, CypherUtils.secretAESKeyString);
+
             //print kết qua ra màn hình
-            System.out.println("FROM SERVER: " + sentence_from_server);
+            System.out.println("FROM SERVER: " + dencryptedText);
             if (sentence_to_server.equals("end")) {
                 //Đóng liên kết socket
                 clientSocket.close();

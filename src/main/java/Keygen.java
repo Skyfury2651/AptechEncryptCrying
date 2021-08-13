@@ -20,4 +20,5 @@ public class Keygen {
     public void setPrivateKey(PrivateKey privateKey) {
         this.privateKey = privateKey;
     }
+
 }

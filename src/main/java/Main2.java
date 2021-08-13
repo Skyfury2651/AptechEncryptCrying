@@ -52,7 +52,7 @@ public class Main2 {
                             InputStreamReader(clientSocket.getInputStream()));
 
             String encryptedText = CypherUtils.encryptTextUsingAES(sentence_to_server, CypherUtils.secretAESKeyString);
-            String encryptedAESKeyString = CypherUtils.encryptAESKey(CypherUtils.secretAESKeyString, privateKey);
+            String encryptedAESKeyString = CypherUtils.encryptAESKey(encryptedText, privateKey);
 
             //Gửi chuỗi ký tự tới Server thông qua outputStream đã nối với Socket (ở trên)
 //            outToServer.writeBytes(sentence_to_server + '\n');

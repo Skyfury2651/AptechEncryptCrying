@@ -56,7 +56,7 @@ public class Main2 {
 
             //Gửi chuỗi ký tự tới Server thông qua outputStream đã nối với Socket (ở trên)
 //            outToServer.writeBytes(sentence_to_server + '\n');
-            outToServer.writeBytes(encryptedText + '\n');
+            outToServer.writeBytes(encryptedAESKeyString + '\n');
 
             //Đọc tin từ Server thông qua InputSteam đã nối với socket
             sentence_from_server = inFromServer.readLine();

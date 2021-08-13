@@ -95,9 +95,12 @@ public class Main {
             outToClient.writeBytes(DatatypeConverter.printHexBinary(publicKey.getEncoded()));
             //Đọc thông tin từ socket
             sentence_from_client = inFromClient.readLine();
+
+            String dencryptedAESKeyString = CypherUtils.decryptAESKey(sentence_from_client, Main2.publicKey);
+            String dencryptedText = CypherUtils.decryptTextUsingAES(dencryptedAESKeyString, CypherUtils.secretAESKeyString);
 //            sentence_from_client = decryptAESKey(encryptedAESKeyString, publicKey);
 
-            sentence_to_client = sentence_from_client + " (Server accepted!)" + '\n';
+            sentence_to_client = dencryptedText + " (Server accepted!)" + '\n';
             //ghi dữ liệu ra socket
             outToClient.writeBytes(sentence_to_client);
 
